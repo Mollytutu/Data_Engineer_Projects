@@ -1,0 +1,4 @@
+# Python dependencies for the local Kafka producer and Spark consumer.
+kafka-python==3.0.10
+pandas==3.0.5
+pyspark==4.0.1

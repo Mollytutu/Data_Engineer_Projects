@@ -1,0 +1,60 @@
+name: bank_pipeline_harness
+version: "1.0.0"
+
+checks:
+  structure:
+    command: bash scripts/check_structure.sh
+    purpose: Ensure the repository matches the target architecture folders.
+  config:
+    command: bash scripts/check_config.sh
+    purpose: Ensure required pipeline config sections are present.
+  docs:
+    command: bash scripts/check_docs.sh
+    purpose: Ensure every major pipeline layer has a README.
+  dbt:
+    command: bash scripts/check_dbt.sh
+    purpose: Ensure dbt layers are registered, with optional parsing when DBT_HARNESS_PARSE=1.
+
+pipeline_layers:
+  batch_ingestion:
+    inputs:
+      - Batch CSV
+      - Batch JSON
+    paths:
+      - ingestion/batch
+      - data/raw
+  streaming_ingestion:
+    inputs:
+      - Kafka/MSK
+    paths:
+      - ingestion/streaming
+      - streaming/kafka
+  processing:
+    engines:
+      - AWS Glue
+      - Spark
+      - Spark Streaming
+    paths:
+      - glue/jobs
+      - spark/jobs
+      - data/curated
+  warehouse:
+    platforms:
+      - Snowflake
+    paths:
+      - snowflake/raw
+      - snowflake/stages
+      - snowflake/load_scripts
+      - snowflake/warehouse
+  transformations:
+    tool: dbt
+    paths:
+      - dbt_bank/models/staging
+      - dbt_bank/models/intermediate
+      - dbt_bank/models/core
+      - dbt_bank/models/marts
+  business_outputs:
+    paths:
+      - reporting
+      - fraud
+      - reconciliation

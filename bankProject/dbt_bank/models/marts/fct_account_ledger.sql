@@ -1,0 +1,21 @@
+select
+    transaction_id,
+    account_id,
+    client_id,
+    transaction_timestamp,
+    transaction_type,
+    debit_credit,
+    amount,
+    case when debit_credit = 'D' then -amount else amount end as signed_amount,
+    currency,
+    balance_after_transaction,
+    available_balance,
+    ledger_balance,
+    status,
+    updated_at,
+    account_type,
+    account_status,
+    client_type,
+    risk_level,
+    country as client_country
+from {{ ref('int_account_ledger_enriched') }}

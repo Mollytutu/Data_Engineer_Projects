@@ -1,0 +1,5 @@
+order_id,customer_id,product,quantity,unit_price,order_date,region
+ORD-011,CUST-102,Monitor,1,25000,2024-03-01,North
+AWS Training — Day 5: AWS Glue | Data Engineering Focus Page 19
+ORD-012,CUST-103,Laptop,1,75000,2024-03-02,East
+ORD-013,CUST-105,Mouse,8,1500,2024-03-03,South

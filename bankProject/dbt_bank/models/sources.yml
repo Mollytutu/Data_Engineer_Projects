@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bank_raw
+    database: BANK_DB
+    schema: RAW
+    tables:
+      - name: payments_current
+      - name: payment_events
+      - name: rejected_payment_events
+      - name: account_ledger_transactions
+      - name: accounts
+      - name: clients
+      - name: batch_payments

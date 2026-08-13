@@ -1,0 +1,5 @@
+order_id,customer_id,product,quantity,unit_price,order_date,region
+ORD-007,CUST-106,Keyboard,1,3500,2024-02-01,North
+ORD-008,CUST-107,Monitor,3,25000,2024-02-02,East
+ORD-009,CUST-101,Laptop,1,75000,2024-02-03,South
+ORD-010,CUST-108,Mouse,10,1500,2024-02-04,West

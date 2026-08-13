@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_batch_payments
+    description: Valid Pipeline 1 batch payments loaded from curated S3 Parquet.
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+      - name: account_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_accounts')
+                field: account_id
+      - name: client_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_clients')
+                field: client_id
+      - name: payment_date
+        data_tests:
+          - not_null
+      - name: amount
+        data_tests:
+          - not_null
+      - name: direction
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['INBOUND', 'OUTBOUND']
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['PENDING', 'SETTLED', 'REJECTED', 'RETURNED']
+
+  - name: stg_accounts
+    columns:
+      - name: account_id
+        data_tests:
+          - not_null
+          - unique
+      - name: client_id
+        data_tests:
+          - not_null
+
+  - name: stg_clients
+    columns:
+      - name: client_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_payments_current
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: amount
+        data_tests:
+          - not_null
+
+      - name: new_status
+        data_tests:
+          - not_null
+
+  - name: stg_payment_events
+    columns:
+      - name: event_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: payment_id
+        data_tests:
+          - not_null

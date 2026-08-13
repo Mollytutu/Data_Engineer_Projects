@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: fct_batch_payments
+    description: Business-ready fact table for Pipeline 1 batch payments.
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+      - name: amount
+        data_tests:
+          - not_null
+
+  - name: fct_account_ledger
+    description: Current core-banking ledger transactions after CDC application.
+    columns:
+      - name: transaction_id
+        data_tests:
+          - not_null
+          - unique
+  - name: fct_payments
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: amount
+        data_tests:
+          - not_null
+
+      - name: current_status
+        data_tests:
+          - not_null
+
+  - name: agg_payment_status
+    columns:
+      - name: current_status
+        data_tests:
+          - not_null
+          - unique
+
+  - name: agg_payment_type
+    columns:
+      - name: payment_type
+        data_tests:
+          - not_null
+          - unique

@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_account_ledger_transactions
+
+    columns:
+      - name: transaction_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_accounts')
+                field: account_id
+
+      - name: client_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_clients')
+                field: client_id
+
+
+      - name: amount
+        data_tests:
+          - not_null
+
+      - name: debit_credit
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['D', 'C']
+
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['PENDING', 'POSTED', 'REVERSED']

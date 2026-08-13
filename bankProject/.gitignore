@@ -1,0 +1,33 @@
+.DS_Store
+.venv/
+.airflow-venv/
+.airflow-home/
+airflow/config/
+airflow/logs/
+airflow/plugins/
+.scala-build/
+Data_Engineer_Projects/
+watchdog/reports/latest.md
+*.log
+__pycache__/
+*.py[cod]
+
+# Local streaming runtime output
+data/checkpoints/
+data/raw/pipeline3_s3_bronze/
+data/quarantine/
+data/curated/payment_events/
+data/curated/core_banking_ledger/
+
+# Local dbt credentials and generated artifacts
+dbt_bank/profiles.yml
+dbt_bank/.user.yml
+dbt_bank/logs/
+dbt_bank/target/
+dbt_bank/dbt_packages/
+
+# Personal scratch files and generated local outputs
+Screenshot*.png
+try.py
+rejected_payments/
+watchdog/mollyNote

@@ -1,0 +1,18 @@
+name: bank_pipeline_watchdog
+version: "1.0.0"
+
+alert_conditions:
+  - required architecture path is missing
+  - required config key is missing
+  - major folder README is missing or empty
+  - dbt model layer is not registered
+  - optional dbt parse fails when DBT_HARNESS_PARSE=1
+
+report:
+  default_path: watchdog/reports/latest.md
+  format: markdown
+
+ci:
+  run_on_push: true
+  run_on_pull_request: true
+  scheduled_check: daily

@@ -1,0 +1,5 @@
+# Pipeline 3: local AWS DMS behavior simulator and S3 Bronze output.
+psycopg[binary]==3.2.9
+boto3==1.40.1
+SQLAlchemy==2.0.43
+pyarrow==21.0.0

@@ -1,0 +1,9 @@
+# Example configuration values for the pipeline (fill in secrets via CI/secret manager)
+ingestion:
+  batch_schedule: "0 2 * * *"
+  kafka_bootstrap: "kafka:9092"
+
+snowflake:
+  account: "<account>"
+  user: "<user>"
+  role: "<role>"
