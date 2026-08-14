@@ -38,3 +38,29 @@ Stop standalone Airflow with `Ctrl+C`. A production deployment would use MWAA
 roles, Connections/Secrets Manager, remote logging, alerting, and a production
 metadata database. Airflow coordinates DMS/Kafka/Glue/dbt; it does not replace
 those processing or ingestion systems.
+
+## Docker Compose integration
+
+`docker-compose.bank-project.yaml` is an override for the official Airflow
+Docker Compose stack. It mounts the complete repository in the Celery worker
+and installs the runtime libraries used by the DAG tasks. Set the host paths
+when starting Compose:
+
+```bash
+export BANK_PROJECT_DIR="$PWD"
+export AIRFLOW_PROJ_DIR="$PWD/airflow"
+export AWS_CONFIG_DIR="$HOME/.aws"
+
+docker compose \
+  -f /path/to/official-airflow/docker-compose.yaml \
+  -f airflow/docker-compose.bank-project.yaml \
+  up -d
+```
+
+For Pipeline 3, create an Airflow variable named
+`pipeline3_postgres_dsn`. When PostgreSQL runs on the host and Airflow runs in
+Docker, use `host.docker.internal` rather than `localhost`. Store the password
+in Airflow or a secrets backend; never commit the DSN.
+
+The Docker worker uses read-only host AWS configuration for the local demo.
+Production MWAA would obtain AWS permissions from its IAM execution role.

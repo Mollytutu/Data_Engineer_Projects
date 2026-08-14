@@ -1,0 +1,20 @@
+services:
+  airflow-apiserver:
+    environment:
+      BANK_PROJECT_ROOT: /opt/bankProject
+  airflow-scheduler:
+    environment:
+      BANK_PROJECT_ROOT: /opt/bankProject
+  airflow-dag-processor:
+    environment:
+      BANK_PROJECT_ROOT: /opt/bankProject
+  airflow-triggerer:
+    environment:
+      BANK_PROJECT_ROOT: /opt/bankProject
+  airflow-worker:
+    environment:
+      BANK_PROJECT_ROOT: /opt/bankProject
+      _PIP_ADDITIONAL_REQUIREMENTS: "apache-airflow-providers-postgres boto3 dbt-snowflake psycopg[binary]"
+    volumes:
+      - ${BANK_PROJECT_DIR}:/opt/bankProject
+      - ${AWS_CONFIG_DIR}:/home/airflow/.aws:ro
